@@ -16,7 +16,8 @@ Analog amplifier circuits are fundamental building blocks in electronic systems.
 
 In this project, different amplifier configurations are designed and simulated using **LTspice**, a SPICE-based circuit simulation software developed by Analog Devices. LTspice allows engineers and students to model MOSFET devices and evaluate important parameters such as voltage gain, frequency response, input impedance, output impedance, and power consumption.These circuits are designed using TSMC MOSFET models and analyzed through simulation. The results help in understanding the behavior of CMOS amplifiers and provide practical experience in analog IC design using simulation tools.
 
-## MOSFET Amplifier Fundamentals
+
+## MOSFET Amplifier Fundamentals:
 
 MOSFET amplifiers are used to increase the amplitude of small input signals.  
 For proper amplification, the MOSFET must operate in the **saturation region**, where it behaves like a controlled current source.
