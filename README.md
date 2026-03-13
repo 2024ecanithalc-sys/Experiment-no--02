@@ -2,6 +2,7 @@
 Experiment no -02
 ## Design the amplifier configurations using tsmc is LTSPICE 
 
+
 ---
 ##  AIM :
 
@@ -57,3 +58,6 @@ For proper amplification, the MOSFET must operate in the **saturation region**, 
 - Uses a **current mirror or active transistor load** instead of a resistor.
 - **Advantage:** Achieves higher gain.
 - **Limitation:** Sensitive to biasing conditions.
+
+## CONFIGURATION - 1
+
