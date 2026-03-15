@@ -109,10 +109,112 @@ The **1kΩ resistor** connected to the source of M2 provides:
 - Bias stability
 - Reduced distortion
 
+## THEORY :
+
+### Circuit Components
+
+The circuit consists of the following main components:
+
+- **NMOS transistor** acting as the amplifying device  
+- **PMOS transistor** acting as the active load  
+- **Source degeneration resistor (Rs)**  
+- **Bias voltage (VB)** for proper transistor operation  
+- **Output node** taken from the drain terminal
+
+---
+
+### PMOS Active Load
+
+Instead of using a passive resistor as the load, a **PMOS transistor** is used as an active load.  
+The PMOS transistor provides a **higher output resistance** compared to a conventional resistor, which helps in increasing the **voltage gain** of the amplifier.
+
+Using a PMOS transistor as a load also makes the circuit **more suitable for integrated circuit (IC) implementation**, since large resistors consume significant chip area.
+
+---
+
+### Source Degeneration
+
+A **source resistor (Rs)** is connected to the source of the NMOS transistor.  
+This configuration is known as **source degeneration**.
+
+The resistor introduces **negative feedback** into the circuit. When the current through the NMOS increases, the voltage drop across Rs also increases, which reduces the effective gate-to-source voltage (Vgs). This helps control the current flowing through the transistor.
+
+---
+
+### Effects of Source Degeneration
+
+The source degeneration resistor provides several advantages:
+
+- Improves the **linearity** of the amplifier  
+- Helps **stabilize the operating (bias) point**  
+- Reduces signal **distortion**  
+- Slightly **reduces the overall voltage gain**
 
 
+## Design Calculations :
+
+### 1. Drain Current (ID)
+
+For the NMOS transistor operating in saturation region:
+
+ID = (1/2) * μn * Cox * (W/L)n * (VGS − VTN)^2
+
+Where:
+
+- μn = Electron mobility
+- Cox = Oxide capacitance per unit area
+- (W/L)n = Aspect ratio of NMOS transistor
+- VGS = Gate to source voltage
+- VTN = Threshold voltage of NMOS
+
+---
+
+### 2. Transconductance (gm)
+
+The transconductance of the NMOS transistor is given by:
+
+gm = 2ID / (VGS − VTN)
+
+### 4. Voltage Gain (Av)
+
+For a common source amplifier with source degeneration:
+
+Av = - gm (ron || rop) / (1 + gmRs)
+
+Where:
+
+- gm = Transconductance of NMOS
+- Rs = Source degeneration resistor
+- ron = Output resistance of NMOS
+- rop = Output resistance of PMOS
+
+The negative sign indicates **phase inversion**.
+
+---
+
+### 5. PMOS Active Load Current
+
+For the PMOS transistor operating in saturation:
+
+ID = (1/2) * μp * Cox * (W/L)p * (VSG − |VTP|)^2
+
+Where:
+
+- μp = Hole mobility
+- (W/L)p = Aspect ratio of PMOS
+- VSG = Source to gate voltage
+- VTP = Threshold voltage of PMOS
+
+The PMOS current must match the NMOS drain current for proper biasing.
 
 
+### 8. Output Voltage
+
+The output voltage is taken at the drain node:
+
+Vout = VDD − ID * Rp (effective load)
+
+Where Rp represents the effective resistance of the PMOS active load.
 
 
 
