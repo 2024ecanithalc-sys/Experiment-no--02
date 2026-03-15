@@ -61,3 +61,135 @@ For proper amplification, the MOSFET must operate in the **saturation region**, 
 
 ## CONFIGURATION - 1
 
+## CIRCUIT DIAGRAM :
+
+![Image description] 
+# CMOS Common Source Amplifier with Active Load
+
+
+# Circuit description :
+
+This circuit represents a **CMOS common-source amplifier** that uses an **NMOS transistor as the amplifying device** and a **PMOS transistor as an active load**. The design is commonly used in analog integrated circuits for **small-signal voltage amplification**.
+
+# Components :
+- **M1 (PMOS)** – Acts as an active load connected to the supply voltage.
+- **M2 (NMOS)** – Functions as the main amplifying transistor.
+- **V1 (2V)** – Power supply (VDD).
+- **V3 (1.36V)** – Bias voltage applied to the PMOS gate.
+- **V2** – Input signal source.
+- **1kΩ Resistor** – Source degeneration resistor for the NMOS transistor.
+- **Vout** – Output node taken at the drain connection of M1 and M2.
+
+# Input Signal
+The input voltage is defined as:
+
+SINE(0.8 10m 1000)
+
+Where:
+- **0.8 V** = DC offset  
+- **10 mV** = Amplitude of the input signal  
+- **1000 Hz** = Frequency of the signal
+
+# Circuit Operation
+1. The input signal is applied to the **gate of the NMOS transistor (M2)**.
+2. Variations in the input voltage change the **gate-to-source voltage (VGS)** of M2.
+3. This variation controls the **drain current** flowing through M2.
+4. The **PMOS transistor (M1)** acts as an active load, providing a nearly constant current and improving voltage gain.
+5. The **output voltage (Vout)** is measured at the node between M1 and M2.
+
+# Output Behavior
+- When **Vin increases**, the NMOS conducts more current, causing **Vout to decrease**.
+- When **Vin decreases**, the NMOS conducts less current, causing **Vout to increase**.
+
+This results in an **inverted amplified output signal**.
+
+# Source Degeneration
+The **1kΩ resistor** connected to the source of M2 provides:
+- Improved linearity
+- Bias stability
+- Reduced distortion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
