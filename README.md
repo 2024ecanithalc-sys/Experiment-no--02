@@ -394,9 +394,165 @@ Lower cutoff frequency:
 
 
 
+## CONFIGURATION - 2
+### Circuit :
+
+The circuit represents a **common source amplifier with active load** implemented using CMOS transistors in **TSMC 0.18 µm technology**.
+
+- **M1 (NMOS)** acts as the main amplifying transistor. The input signal `Vin` is applied to its gate through the voltage source **V4**, which is defined as `SINE(0.91 10m 1k)`.
+- **M2 (PMOS)** works as an **active load transistor** and is connected to the supply voltage **V1 = 2 V**. Its gate is biased using **V3 = 2 V** to maintain proper operating conditions.
+- **M3 (NMOS)** functions as a **current source / bias transistor**. The gate of M3 is biased with **V5 = 0.61 V** to set a constant current through the amplifier branch.
+- The **output voltage (Vout)** is taken at the drain node of M1 and M2.
+- **V2 = 1.36 V** is used to provide an additional biasing condition for proper transistor operation.
+- The circuit includes different analyses:
+  - `.op` for operating point analysis
+  - `.dc V4 0 2` for DC sweep of the input
+  - `.tran 5m` for transient response
+  - `.ac dec 10 0.1 100G` for frequency response analysis
+
+### Calculations :
+
+Given Specifications:
+
+VDD = 2 V
+ID = 200 µA
+VOV = 0.25 V
+CL = 1 pF
+Ln = Lp = 180 nm
+P<= 1.5mW
+εr = 3.9
+ε0 = 8.854 × 10⁻¹² F/m
+tox = 4.1 × 10⁻⁹ m
+μn = 273.809 cm²/Vs
+μp = 115.689 cm²/Vs
+
+#### Power constraint:
+Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.5mW)
+#### Output Voltage Selection
+For symmetrical output swing:
+
+Vout = VDD/2 
+Vout = 2/2
+Vout = 1 V
+
+#### For M1 (NMOS) transistor :
+
+VOV = 0.25V and VTH = 0.36V
+ VS1 = VD3
+We know that, VDS3 >= VOV
+Hence, VD3 = VS1 = 0.3 V
+Vin = VG1 = VS1 + VGS1 = 0.3 + 0.61 = 0.91 V
+* For M1 to be SATURATION, 
+VGS1 >= VTH
+0.61 V >= 0.36 V
+also VDS1 >= VOV
+VDS1 = VD1 - VS1 = Vout - VS1 = 1 - 0.3 = 0.7 V
+Hence, 0.7 V >= 0.25 V
+Both the conditions are satisfied, M1 is operating in saturation region.
+
+#### For M3 (NMOS) transistor:
+
+ VOV = 0.25V, VTH = 0.36V
+
+ VGS3 = VOV + VTH 
+      = 0.25 + 0.36 
+ VGS3 = 0.61V
+so VB2 = 0.61V
+* For M3 to be SATURATION,
+VGS3 >= VTH
+0.61 V >= 0.36 V
+also VDS3 >= VOV
+VDS = 0.33 V from the simulation
+Hence, 0.33 >= 0.25
+Both the conditions are satisfied. M3 is operating in SATURATION region.
+
+#### For M2 (PMOS) transistor:
+
+VOV = 0.25V, VTH = 0.39V
+VSG2 = VOV + |VTH| 
+VSG2 = 0.25 + 0.39
+VSG2 = 0.64 V
+ VG2 = VS2 - VSG2
+ VG2 = 2 - 0.64    
+ VG2 = 1.36 V
+ so VB1 = 1.36 V
+* For M2 to be SATURATION,
+VSG2 >= |VTH|
+0.64 V >= 0.36 V
+also VSD2 >= VOV
+VSD2 = VDD - Vout  
+VSD2 = 2 - 1
+VSD2 = 1 V
+Hence, 1 V >= 0.25 V
+
+Both the conditions are satisfied.  M2 is operating in SATURATION region.
+
+#### Drain current equation for M1 and M3 transistor:
+ID = (1/2) kn' (W/L) (VOV)^2
+Where
+kn' = μn Cox
+μn = 273.81 cm²/Vs
+Cox = εox / tox
+εox = 8.854 × 10⁻¹² × 3.9
+tox = 4.1 × 10⁻⁹
+kn' = 2.306 × 10⁻⁴
+Now solving for W:
+W = 5 µm
+Thus
+W1 = 5 µm
+similarly, W3 = 5 µm
+
+#### Drain current equation for M2 transistor:
+ID = (1/2) kn' (W/L) (VOV)^2
+
+W2 = 11.82 µm 
+
+By varying width:
+* W1 = 25 µm → Id = 200 µA
+* W2 = 34.605 µm → Id = 200 µA
+* W3 = 15.79 µm → Id = 200 µA
 
 
+### Simulated Results:
 
+Vin(p-p) = Vin (max) − Vin (min)
+         = 919.61 mV - 900.39 mV
+
+Vin(p-p) =  19.22 mV
+
+Vout(p-p) = Vout (max) − Vout (min)
+          = 1.03 V - 967.25 mV
+
+Vout(p-p) = 62.75 mV
+Voltage Gain: 
+
+Av = ΔVout / ΔVin
+Av =  62.75/ 19.22
+Av = 3.26 V/V
+
+Gain in decibels:
+
+Gain(dB) = 20 log10(Av) 
+         = 20log(3.26)
+  Av(dB) = 10.26 dB
+
+### Theoritical Results:
+
+gm1 = 2ID / VOV
+gm1= (2 × 200 × 10⁻⁶) / 0.25
+gm1 = 1.6 × 10⁻³ S
+ro = 1 / (λ ID)
+ro = 1 / (0.1 × 200 × 10⁻⁶)
+ro1 = 50 kΩ
+
+similarly, ro2 = 50 kΩ ,  ro3 = 50 kΩ
+
+(ro1 || ro2) = 25 kΩ
+Av = -gm1 (ro1 || ro2) / (1 + gm1 · ro3)
+AV = - 0.5 V/V
+Av(dB) = 20 log(Av)
+       = 20 log(0.5)
+       = 6.020 dB
 
 
 
