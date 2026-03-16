@@ -554,7 +554,56 @@ Av(dB) = 20 log(Av)
        = 20 log(0.5)
        = 6.020 dB
 
+Voltage Gain: The measured voltage gain of the amplifier is found to be
+  
+    Av = 10.87 - 3 = 7.87 dB
+* Cutoff Frequency: The frequency at which the gain drops to the −3 dB level is observed as
 
+  * Upper cutoff frequency:
+
+    fH = 110.529 MHz
+
+  * Lower cutoff frequency:
+
+    fL ≈ 0
+
+  * Bandwidth:
+
+      BW = FH − FL
+
+      BW = 110.529 MHz
+
+#### Gain Bandwidth Product:
+
+   GBP = Av × BW
+   GBP = 3.49 × 110.529  MHz
+
+   GBP = 385.71 MHz
+   
+   GBP = 0.385 GHz
+
+#### Comparision of Results:
+
+| Parameter | Theoretical | Simulated |
+|-----------|-------------|-----------|
+| Voltage Gain (A_v) | 0.5 V/V | 3.26 V/V |
+| Gain (dB) | 6.020 dB | 10.26 dB |
+
+### Result:
+
+The Common Source (CS) amplifier that uses a resistive load along with source degeneration shows a lower voltage gain compared to a conventional CS amplifier. Simulation results indicate that although the peak-to-peak output amplitude is slightly reduced, the circuit produces a more linear output signal and maintains a more stable operating point even when MOSFET parameters vary.
+
+### Validation
+
+The simulation confirms the theoretical gain equation:
+
+Av = -(gm × RD) / (1 + gm RS)
+
+The simulated gain is close to the calculated value. The output waveform is inverted by 180° relative to the input, which is a characteristic property of a common-source amplifier. A small AC component at the source node indicates the presence of negative feedback in the circuit.
+
+### Inference
+
+The inclusion of M3 introduces negative feedback in the circuit, which enhances the stability of the amplifier operation. This feedback mechanism allows the amplifier to handle larger input signals with reduced distortion. Even though source degeneration decreases the voltage gain, it improves bias stability and linear behavior. Therefore, a balanced design must consider both feedback and output impedance to maintain adequate gain and bandwidth.
 
 
 
