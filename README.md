@@ -339,9 +339,76 @@ By varying width:
 * Wp = 2.9 µm → Id = 200 µA
 * Wn =4.9  µm → Id = 200 µA
 
+## Simulated Results:
+Voltage Gain: Av = ΔVout / ΔVin Av = (1.379-1.136) / (819.64-800) = 12.39 V/V
+
+Gain in decibels: Gain(dB) = 20 log10(Av) = 20 log10(12.39) = 21.86 dB
+
+## Theoritical Results:
+Small-signal Voltage Gain: Av = gm × RD = (1.6 × 10⁻³) × (5 × 10³) = 3.70
+
+Gain in decibels: Gain(dB) = 20 log10(Av) = 20log(3.70) = 11.36 dB
+
+gm = 2ID / VOV
+
+gm = (2 × 200 × 10⁻⁶) / 0.25
+
+gm = 1.6 × 10⁻³ S
 
 
+ro = 1 / (λ ID)
 
+ro = 1 / (0.1 × 200 × 10⁻⁶)
+
+ro = 50 kΩ
+
+
+(ro1 || ro2) = 25 kΩ
+
+
+Av = - gm (ro1 || ro2) / (1 + gm RS) Av = - (1.6 × 10⁻³ × 25 × 10³) / (1 + 1.6 × 10⁻³ × 1 × 10³) Av = -40 / 2.6
+
+Av = -15.38 V/V
+
+Av(dB) = 20 log(15.38)
+
+Av(dB) = 23.74 dB
+
+The **simulated gain (21.86  dB)** is smaller than the **theoretical gain (23.74 dB)** because theoretical calculations usually assume ideal conditions with very large output resistance. In practical simulation, effects like **channel length modulation** reduce the output resistance of the transistors. Additionally, **parasitic capacitances** and accurate device model parameters lower the effective gain. The presence of the **source degeneration resistor (Rs)** also decreases the overall voltage gain of the amplifier.
+
+ Voltage Gain: The measured voltage gain of the amplifier is found to be
+
+  Av = 21.76-3 ≈ 18.76 dB
+
+* Cutoff Frequency: The frequency at which the gain drops to the −3 dB level is observed as
+
+Upper cutoff frequency:
+
+  fH = 191.095 MHz
+
+Lower cutoff frequency:
+
+  fL ≈ 0
+
+* Bandwidth:
+
+  BW = FH − FL
+
+  BW = 191.095 MHz
+
+  ## Comparision of Results:
+
+ | Parameter | Theoretical | Simulated |
+|-----------|-------------|-----------|
+| Voltage Gain (A_v) | 15.38 V/V | 12.39 V/V |
+| Gain (dB) | 23.74 dB | 21.86 dB |
+
+## Inference
+
+- The difference between theoretical and simulated results occurs due to practical MOSFET non-idealities such as channel length modulation, mobility degradation, and parasitic capacitances.  
+- These non-ideal effects introduce a dominant pole that limits the high-frequency response of the amplifier.  
+- Source degeneration slightly reduces the gain but improves the stability and linearity of the circuit.  
+- Overall, the amplifier performance remains close to the expected theoretical results.
 
 
 
