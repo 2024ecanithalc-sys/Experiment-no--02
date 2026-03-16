@@ -606,7 +606,129 @@ The simulated gain is close to the calculated value. The output waveform is inve
 The inclusion of M3 introduces negative feedback in the circuit, which enhances the stability of the amplifier operation. This feedback mechanism allows the amplifier to handle larger input signals with reduced distortion. Even though source degeneration decreases the voltage gain, it improves bias stability and linear behavior. Therefore, a balanced design must consider both feedback and output impedance to maintain adequate gain and bandwidth.
 
 
+## CONFIGURATION - 3
 
+## Circuit Description
+
+The circuit represents a **common source (CS) amplifier with source degeneration and active load** implemented using CMOS transistors with **TSMC 0.18 µm technology**.
+
+- **M1 (NMOS)** acts as the main amplifying transistor. The input signal **Vin** is applied to its gate through the voltage source **V4**, which is defined as `SINE(1.22 10m 1k)` for transient analysis and `AC 1` for AC analysis.
+  
+- **M2 (PMOS)** functions as the **active load** for the amplifier. It is connected to the supply voltage **V1 = 2 V**, and its gate is biased using **V2 = 2 V** to maintain proper operation.
+
+- **M3 (NMOS)** acts as a **current source / bias transistor**. Its gate is biased using **V3 = 1.36 V**, which helps establish a constant current through the amplifier branch.
+
+- The **output voltage (Vout)** is taken at the drain node of **M1** and **M2**.
+
+- The circuit includes different analyses:
+  - `.op` – Determines the DC operating point of the circuit.
+  - `.dc V4 0 2` – Performs DC sweep analysis of the input voltage.
+  - `.tran 5m` – Performs transient analysis to observe the time-domain response.
+  - `.ac dec 10 10 100G` – Performs AC analysis to study the frequency response of the amplifier.
+ 
+    ### Calculations :
+Given Specifications:
+VDD = 2 V
+ID = 200 µA
+VOV = 0.25 V
+CL = 1 pF
+Ln = Lp = 180 nm
+P<= 1.5mW
+εr = 3.9
+ε0 = 8.854 × 10⁻¹² F/m
+tox = 4.1 × 10⁻⁹ m
+μn = 273.809 cm²/Vs
+μp = 115.689 cm²/Vs
+
+#### Power constraint:
+
+Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.5mW)
+
+#### Output Voltage Selection
+For symmetrical output swing:
+Vout = VDD/2
+Vout = 2/2
+Vout = 1 V
+
+#### For M1 (NMOS) transistor :
+VOV = 0.25V and VTH = 0.36V
+VGS1 = VOV + VTH 
+     = 0.25 + 0.36  
+VGS1 = 0.61V
+VS1 = 0.61 V
+Vin =  VS1 + VGS1 
+Vin = 0.61 + 0.61 
+Vin = 1.22 V
+so, VG1 = 1.22 V
+* For M1 to be SATURATION,
+VGS1 >= VTH
+0.61 V >= 0.36 V
+also VDS1 >= VOV
+
+VDS1 = VD1 - VS1
+     = Vout - VS1 
+     = 1 - 0.61
+     
+VDS1 = 0.39 V
+Hence, 0.39 V >= 0.25 V
+Both the conditions are satisfied, M1 is operating in saturation region.
+
+#### For M3 (NMOS) transistor:
+
+VOV = 0.25V, VTH = 0.36V
+
+VG3 = VS1
+VGS3 = VOV + VTH
+     = 0.25 + 0.36 
+VGS3 = 0.61V
+so, VG3 = 0.61V
+For M3 to be SATURATION,
+VGS3 >= VTH
+0.61 V >= 0.36 V
+also VDS3 >= VOV
+VDS = 0.606 V from the simulation
+Hence, 0.606 >= 0.25
+Both the conditions are satisfied. M3 is operating in SATURATION region
+
+#### For M2 (PMOS) transistor:
+
+VOV = 0.25V, VTH = 0.39V
+VSG2 = VOV + |VTH| = 0.25 + 0.39 VSG2 = 0.64 V
+VG2 = VS2 - VSG2 = 2 - 0.64
+VG2 = 1.36 V 
+so VB1 = 1.36 V
+For M2 to be SATURATION,
+VSG2 >= |VTH|
+0.64 V >= 0.36 V
+also VSD2 >= VOV
+VSD2 = VDD - Vout
+VSD2 = 2 - 1 
+VSD2 = 1 V
+Hence, 1 V >= 0.25 V
+Both the conditions are satisfied. M2 is operating in SATURATION region.
+
+#### Drain current equation for M1 and M3 transistor:
+ID = (1/2) kn' (W/L) (VOV)^2
+Where
+kn' = μn Cox
+μn = 273.81 cm²/Vs
+Cox = εox / tox
+εox = 8.854 × 10⁻¹² × 3.9
+tox = 4.1 × 10⁻⁹
+kn' = 2.306 × 10⁻⁴
+Now solving for W:
+W = 5 µm
+Thus
+W1 = 5 µm
+similarly, W3 = 5 µm
+
+#### Drain current equation for M2 transistor:
+ID = (1/2) kn' (W/L) (VOV)^2
+W2 = 11.82 µm
+By varying width:
+* W1 = 14.8  µm → Id = 200 µA
+* W2 = 35 µm → Id = 200 µA
+* W3 = 14.9  µm → Id = 200 µA
 
 
 
