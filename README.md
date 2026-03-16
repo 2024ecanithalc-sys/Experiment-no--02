@@ -730,60 +730,81 @@ By varying width:
 * W2 = 35 µm → Id = 200 µA
 * W3 = 14.9  µm → Id = 200 µA
 
+## Simulated Results:
+
+Vin(p-p) = Vin (max) − Vin (min) = 1.22 V - 1.21 V
+Vin(p-p) = 0.01 V
+Vout(p-p) = Vout (max) − Vout (min) = 1.21 V - 0.869 V
+Vout(p-p) = 0.341 V
+
+Voltage Gain:
+Av = ΔVout / ΔVin Av = 0.341/ 0.01 Av = 34.1 V/V
+Gain in decibels:
+Gain(dB) = 20 log10(Av) = 20log(34.1) 
+Av(dB) = 30.65 dB
+
+#### Theoritical Results:
+
+gm1 = 2ID / VOV
+gm1= (2 × 200 × 10⁻⁶) / 0.25
+gm1 = 1.6 × 10⁻³ S
+ro = 1 / (λ ID)
+ro = 1 / (0.1 × 200 × 10⁻⁶)
+ro1 = 50 kΩ
+similarly, ro2 = 50 kΩ 
+ro3 = 1/gm 
+(ro1 || ro2) = 25 kΩ
+Av = -gm1 (ro1 || ro2) / (1 + gm1 . 1/gm)
+AV = -20 V/V
+Av(dB) = 20 log(20) = 20 log(0.5) = 26.02 dB
+
+* Voltage Gain: The measured voltage gain of the amplifier is found to be
+   Av = 25.195 - 3 = 22.195 dB
+* Cutoff Frequency: The frequency at which the gain drops to the −3 dB level is observed as
+    * Upper cutoff frequency:
+      fH = 345.989 MHz
+    * Lower cutoff frequency:
+      fL ≈ 0
+
+* Bandwidth:
+
+BW = FH − FL
+BW =345.989 MHz
+
+#### Gain Bandwidth Product:
+GBP = Av × BW GBP = 18.182 × 345.989 MHz
+GBP = 6363.49 MHz
+
+### Comparision of Results:
+
+| Parameter | Theoretical | Simulated |
+|-----------|-------------|-----------|
+| Voltage Gain (A_v) | 20 V/V |34.1  V/V |
+| Gain (dB) |26.02 dB |30.65 dB |
+
+## Result
+
+The experimental results of the Common Source (CS) amplifier demonstrate the practical balance between voltage gain, circuit stability, and available voltage headroom. With a supply voltage of 1 V and a threshold voltage of 0.25 V, the transistors achieve an adequate overdrive voltage. This ensures that the MOSFETs operate in the saturation region during operation. As a result, the amplifier exhibits stable performance with good linearity, while minimizing distortion and preventing clipping of the output signal.
+
+## 11. Inference
+
+From the experimental observations, it can be concluded that the Common Source (CS) amplifier achieves effective voltage amplification while maintaining linearity and stability. The proper selection of supply voltage and transistor threshold ensures that the MOSFETs remain in saturation, preventing distortion or clipping. Overall, the amplifier design demonstrates a successful balance between gain, stability, and voltage headroom, confirming that the theoretical design principles translate well into practical performance.
+
+The diode-connected load configuration reduces the overall voltage gain but improves the bandwidth and linearity of the amplifier. This approach is often used in integrated circuit design because large resistors are difficult to implement on a chip. By using an active load, the gain becomes dependent mainly on the transistor dimensions (W/L ratios) rather than precise resistance values, making the circuit performance more predictable.
 
 
+## Comparison of Experiment 2 Configurations (A, B, C)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+| Parameter | Experiment A | Experiment B | Experiment C |
+|-----------|--------------|--------------|--------------|
+| Source Element | Source Resistor (Rs) | NMOS Current Source | Diode-Connected NMOS |
+| Active Load | PMOS | PMOS | PMOS |
+| Drain Current (ID) | 200 µA | 200 µA | 200 µA |
+| Power Dissipation | 1.5 mW | 1.5 mW | 1.5 mW |
+| Theoretical Gain (V/V) | 15.38 | 0.5 | 20 |
+| Simulated Gain (V/V) | 12.39 | 3.26 | 34.1 |
+| Simulated Gain (dB) | 21.86 dB | 10.26 dB | 30.65 dB |
+| Bandwidth | 191.095 MHz | 110.529 MHz | 345.989 MHz |
 
 
 
