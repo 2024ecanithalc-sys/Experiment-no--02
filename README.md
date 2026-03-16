@@ -217,6 +217,128 @@ Vout = VDD − ID * Rp (effective load)
 Where Rp represents the effective resistance of the PMOS active load.
 
 
+## Design Calculation:
+
+### DC Analysis:
+
+Given Specifications:
+
+* VDD = 2 V
+
+* ID = 200 µA
+
+* VOV = 0.25 V
+
+* CL = 1 pF
+
+* Ln = Lp = 180 nm
+
+* P<= 1.5mW
+
+* εr = 3.9
+
+* ε0 = 8.854 × 10⁻¹² F/m
+
+* tox = 4.1 × 10⁻⁹ m
+
+* μn = 273.809 cm²/Vs
+
+* μp = 115.689 cm²/Vs
+
+Power constraint:Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.5mW)
+
+###  Output Voltage Selection
+For symmetrical output swing:
+
+Vout = VDD/2 + VRS
+
+Vout = 1 + 0.2
+
+Vout = 1.2 V
+
+###  Overdrive Voltage
+Assume:
+
+VOV = 0.25 V
+VTH = 0.36 V
+
+VOV = VGS - VTH
+
+VGS = VOV + VTH
+
+VGS = 0.25 + 0.36
+
+VGS = 0.61 V
+
+###  Gate Voltage
+VG = VGS + ID RS
+
+Assume:
+
+VRS = 0.2 V
+
+VG = 0.61 + 0.2
+
+VG = 0.81 V
+
+### Source Resistor
+RS = VRS / ID
+
+RS = 0.2 /200µ 
+
+RS = 1k Ω
+
+### NMOS Width Calculation
+Drain current equation:
+
+ID = (1/2) kn' (W/L) (VOV)^2
+
+Where
+
+kn' = μn Cox
+
+μn = 273.81 cm²/Vs
+
+Cox = εox / tox
+
+εox = 8.854 × 10⁻¹² × 3.9
+
+tox = 4.1 × 10⁻⁹
+
+kn' = 2.306 × 10⁻⁴
+
+Now solving for W:
+
+W = 5 µm
+
+Thus
+
+Wn = 5 µm
+
+### PMOS Gate Bias
+For PMOS: VOV = VSG − |VTP|
+Assume |VTP| = 0.39 V
+
+VSG = VOV + |VTP|
+
+VSG = 0.25 + 0.39
+
+VSG = 0.64 V
+
+Since: VSG = VS − VG
+VS = VDD = 2 V
+
+VG = 2 − 0.64
+VG = 1.36 V
+
+### PMOS Width Calculation
+Wp = (2 ID L) / (μp Cox (VOV)²)
+
+Wp = 11.82 µm
+By varying width:
+* Wp = 2.9 µm → Id = 200 µA
+* Wn =4.9  µm → Id = 200 µA
+
 
 
 
