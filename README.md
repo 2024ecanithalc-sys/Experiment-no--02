@@ -166,6 +166,20 @@ Where:
 - (W/L)n = Aspect ratio of NMOS transistor
 - VGS = Gate to source voltage
 - VTN = Threshold voltage of NMOS
+Given Specifications:
+
+* VDD = 2 V
+* ID = 200 µA
+* VOV = 0.25 V
+* CL = 1 pF
+* Ln = Lp = 180 nm
+* P<= 1.5mW
+* εr = 3.9
+* ε0 = 8.854 × 10⁻¹² F/m
+* tox = 4.1 × 10⁻⁹ m
+* μn = 273.809 cm²/Vs
+* μp = 115.689 cm²/Vs
+Power constraint:Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.5mW)
 
 ---
 
@@ -208,7 +222,7 @@ Where:
 The PMOS current must match the NMOS drain current for proper biasing.
 
 
-### 8. Output Voltage
+### 6. Output Voltage
 
 The output voltage is taken at the drain node:
 
@@ -216,38 +230,6 @@ Vout = VDD − ID * Rp (effective load)
 
 Where Rp represents the effective resistance of the PMOS active load.
 
-
-## Design Calculation:
-
-### DC Analysis:
-
-Given Specifications:
-
-* VDD = 2 V
-
-* ID = 200 µA
-
-* VOV = 0.25 V
-
-* CL = 1 pF
-
-* Ln = Lp = 180 nm
-
-* P<= 1.5mW
-
-* εr = 3.9
-
-* ε0 = 8.854 × 10⁻¹² F/m
-
-* tox = 4.1 × 10⁻⁹ m
-
-* μn = 273.809 cm²/Vs
-
-* μp = 115.689 cm²/Vs
-
-Power constraint:Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.5mW)
-
-###  Output Voltage Selection
 For symmetrical output swing:
 
 Vout = VDD/2 + VRS
@@ -256,7 +238,7 @@ Vout = 1 + 0.2
 
 Vout = 1.2 V
 
-###  Overdrive Voltage
+### 7. Overdrive Voltage
 Assume:
 
 VOV = 0.25 V
@@ -270,7 +252,7 @@ VGS = 0.25 + 0.36
 
 VGS = 0.61 V
 
-###  Gate Voltage
+### 8. Gate Voltage
 VG = VGS + ID RS
 
 Assume:
@@ -281,14 +263,14 @@ VG = 0.61 + 0.2
 
 VG = 0.81 V
 
-### Source Resistor
+### 9.Source Resistor
 RS = VRS / ID
 
 RS = 0.2 /200µ 
 
 RS = 1k Ω
 
-### NMOS Width Calculation
+### 10. NMOS Width Calculation
 Drain current equation:
 
 ID = (1/2) kn' (W/L) (VOV)^2
@@ -315,7 +297,7 @@ Thus
 
 Wn = 5 µm
 
-### PMOS Gate Bias
+### 11.PMOS Gate Bias
 For PMOS: VOV = VSG − |VTP|
 Assume |VTP| = 0.39 V
 
@@ -331,7 +313,7 @@ VS = VDD = 2 V
 VG = 2 − 0.64
 VG = 1.36 V
 
-### PMOS Width Calculation
+### Over all conclusion :
 Wp = (2 ID L) / (μp Cox (VOV)²)
 
 Wp = 11.82 µm
