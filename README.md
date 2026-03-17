@@ -63,7 +63,8 @@ For proper amplification, the MOSFET must operate in the **saturation region**, 
 
 ## CIRCUIT DIAGRAM :
 
-![Image description] 
+<img width="1186" height="758" alt="Screenshot 2026-03-17 225312" src="https://github.com/user-attachments/assets/a6aecdfe-e677-4fa0-84a5-d3137cefe14d" />
+ 
 ## CMOS Common Source Amplifier with Active Load
 
 
