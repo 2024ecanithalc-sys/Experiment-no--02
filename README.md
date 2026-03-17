@@ -151,6 +151,20 @@ The source degeneration resistor provides several advantages:
 - Reduces signal **distortion**  
 - Slightly **reduces the overall voltage gain**
 
+## DC Operating point from LT spice
+
+<img width="914" height="727" alt="Screenshot 2026-03-17 225550" src="https://github.com/user-attachments/assets/af1d4b16-51b7-4be0-ae72-2a6aabc282c4" />
+
+
+## Transient Analysis :
+
+<img width="1759" height="843" alt="Screenshot 2026-03-17 205135" src="https://github.com/user-attachments/assets/b2a03d17-6a74-427e-9712-4455b93ce538" />
+
+
+## AC Analysis :  
+
+<img width="1920" height="1080" alt="Screenshot 2026-03-17 210706" src="https://github.com/user-attachments/assets/64c04aea-8f9f-43fe-afbb-4f5d8b04fc0f" />
+
 
 ## Design Calculations :
 
@@ -174,13 +188,13 @@ Given Specifications:
 * VOV = 0.25 V
 * CL = 1 pF
 * Ln = Lp = 180 nm
-* P<= 1.5mW
+* P<= 1.2mW
 * εr = 3.9
 * ε0 = 8.854 × 10⁻¹² F/m
 * tox = 4.1 × 10⁻⁹ m
 * μn = 273.809 cm²/Vs
 * μp = 115.689 cm²/Vs
-Power constraint:Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.5mW)
+Power constraint:Assuming ID =200µA which satisfy P<=1.5mW (P=V*I ; 2×200×10^−6 ; 400µW<=1.2mW)
 
 ---
 
@@ -246,71 +260,47 @@ VOV = 0.25 V
 VTH = 0.36 V
 
 VOV = VGS - VTH
-
 VGS = VOV + VTH
-
 VGS = 0.25 + 0.36
-
-VGS = 0.61 V
+    = 0.61 V
 
 ### 8. Gate Voltage
 VG = VGS + ID RS
 
 Assume:
-
 VRS = 0.2 V
-
 VG = 0.61 + 0.2
-
 VG = 0.81 V
 
 ### 9.Source Resistor
 RS = VRS / ID
-
 RS = 0.2 /200µ 
-
 RS = 1k Ω
 
 ### 10. NMOS Width Calculation
 Drain current equation:
 
 ID = (1/2) kn' (W/L) (VOV)^2
-
 Where
-
 kn' = μn Cox
-
 μn = 273.81 cm²/Vs
-
 Cox = εox / tox
-
 εox = 8.854 × 10⁻¹² × 3.9
-
 tox = 4.1 × 10⁻⁹
-
 kn' = 2.306 × 10⁻⁴
-
 Now solving for W:
-
 W = 5 µm
-
 Thus
-
 Wn = 5 µm
 
 ### 11.PMOS Gate Bias
 For PMOS: VOV = VSG − |VTP|
 Assume |VTP| = 0.39 V
-
 VSG = VOV + |VTP|
-
 VSG = 0.25 + 0.39
-
 VSG = 0.64 V
-
 Since: VSG = VS − VG
 VS = VDD = 2 V
-
 VG = 2 − 0.64
 VG = 1.36 V
 
@@ -319,55 +309,41 @@ Wp = (2 ID L) / (μp Cox (VOV)²)
 
 Wp = 11.82 µm
 By varying width:
-* Wp = 2.9 µm → Id = 200 µA
-* Wn =4.9  µm → Id = 200 µA
+* Wp = 35.5 µm → Id = 200.8 µA
+* Wn =25.2 µm → Id = 200.8 µA
 
 ## Simulated Results:
-Voltage Gain: Av = ΔVout / ΔVin Av = (1.379-1.136) / (819.64-800) = 12.39 V/V
-
-Gain in decibels: Gain(dB) = 20 log10(Av) = 20 log10(12.39) = 21.86 dB
+Voltage Gain: Av = ΔVout / ΔVin Av = (1.314-1.052) / (0.819-0.799) = 13.1 V/V
+Gain in decibels: Gain(dB) = 20 log10(Av) = 20 log10(12.39) = 22.34 dB
 
 ## Theoritical Results:
 Small-signal Voltage Gain: Av = gm × RD = (1.6 × 10⁻³) × (5 × 10³) = 3.70
-
 Gain in decibels: Gain(dB) = 20 log10(Av) = 20log(3.70) = 11.36 dB
 
 gm = 2ID / VOV
-
 gm = (2 × 200 × 10⁻⁶) / 0.25
-
 gm = 1.6 × 10⁻³ S
-
-
 ro = 1 / (λ ID)
-
-ro = 1 / (0.1 × 200 × 10⁻⁶)
-
+ro = 1 / (0.1 × 200.8 × 10⁻⁶)
 ro = 50 kΩ
-
-
 (ro1 || ro2) = 25 kΩ
 
-
 Av = - gm (ro1 || ro2) / (1 + gm RS) Av = - (1.6 × 10⁻³ × 25 × 10³) / (1 + 1.6 × 10⁻³ × 1 × 10³) Av = -40 / 2.6
-
 Av = -15.38 V/V
+Av(dB) = 20 log(16.01)
+Av(dB) = 24.32 dB
 
-Av(dB) = 20 log(15.38)
-
-Av(dB) = 23.74 dB
-
-The **simulated gain (21.86  dB)** is smaller than the **theoretical gain (23.74 dB)** because theoretical calculations usually assume ideal conditions with very large output resistance. In practical simulation, effects like **channel length modulation** reduce the output resistance of the transistors. Additionally, **parasitic capacitances** and accurate device model parameters lower the effective gain. The presence of the **source degeneration resistor (Rs)** also decreases the overall voltage gain of the amplifier.
+The **simulated gain (22.34 dB)** is smaller than the **theoretical gain  24.32 dB)** because theoretical calculations usually assume ideal conditions with very large output resistance. In practical simulation, effects like **channel length modulation** reduce the output resistance of the transistors. Additionally, **parasitic capacitances** and accurate device model parameters lower the effective gain. The presence of the **source degeneration resistor (Rs)** also decreases the overall voltage gain of the amplifier.
 
  Voltage Gain: The measured voltage gain of the amplifier is found to be
 
-  Av = 21.76-3 ≈ 18.76 dB
+  Av = 22.34 dB-3 ≈ 19.34 dB
 
 * Cutoff Frequency: The frequency at which the gain drops to the −3 dB level is observed as
 
 Upper cutoff frequency:
 
-  fH = 191.095 MHz
+  fH = 169.67 MHz
 
 Lower cutoff frequency:
 
@@ -377,14 +353,14 @@ Lower cutoff frequency:
 
   BW = FH − FL
 
-  BW = 191.095 MHz
+  BW =169.67 MHz
 
   ## Comparision of Results:
 
  | Parameter | Theoretical | Simulated |
 |-----------|-------------|-----------|
-| Voltage Gain (A_v) | 15.38 V/V | 12.39 V/V |
-| Gain (dB) | 23.74 dB | 21.86 dB |
+| Voltage Gain (A_v) | 15.38 V/V |  13.1 V/V|
+| Gain (dB) | 23.74 dB |22.34 dB|
 
 ## Inference
 
