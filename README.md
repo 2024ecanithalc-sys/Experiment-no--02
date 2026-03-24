@@ -373,6 +373,7 @@ Lower cutoff frequency:
 
 ## CONFIGURATION - 2
 ### Circuit :
+<img width="1068" height="748" alt="Screenshot 2026-03-24 213104" src="https://github.com/user-attachments/assets/4dec8c30-2adb-419c-ad9f-78ce8b0b2d70" />
 
 The circuit represents a **common source amplifier with active load** implemented using CMOS transistors in **TSMC 0.18 µm technology**.
 
@@ -478,6 +479,18 @@ W = 5 µm
 Thus
 W1 = 5 µm
 similarly, W3 = 5 µm
+### DC  Operating Point :
+
+<img width="931" height="698" alt="Screenshot 2026-03-24 213047" src="https://github.com/user-attachments/assets/5d657a9b-1276-4659-9d04-b85cfd71c50c" />
+
+### DC Sweep Analysis :
+<img width="1919" height="451" alt="Screenshot 2026-03-24 213716" src="https://github.com/user-attachments/assets/e416f04b-41e2-49fd-99c9-455077840995" />
+
+### Transient Analysis :
+<img width="1919" height="410" alt="Screenshot 2026-03-24 214654" src="https://github.com/user-attachments/assets/9927942f-da9a-4a3f-822a-2aa91659b90d" />
+
+### AC Analysis :
+<img width="1919" height="433" alt="Screenshot 2026-03-24 214900" src="https://github.com/user-attachments/assets/beb934cc-7c1f-48e1-ad3a-c5d89f8705ad" />
 
 #### Drain current equation for M2 transistor:
 ID = (1/2) kn' (W/L) (VOV)^2
@@ -485,9 +498,9 @@ ID = (1/2) kn' (W/L) (VOV)^2
 W2 = 11.82 µm 
 
 By varying width:
-* W1 = 25 µm → Id = 200 µA
-* W2 = 34.605 µm → Id = 200 µA
-* W3 = 15.79 µm → Id = 200 µA
+* W1 = 24.9 µm → Id = 200.8 µA
+* W2 = 35.605 µm → Id = 200.8 µA
+* W3 = 17.2 µm → Id = 200.8 µA
 
 
 ### Simulated Results:
