@@ -155,6 +155,10 @@ The source degeneration resistor provides several advantages:
 
 <img width="914" height="727" alt="Screenshot 2026-03-17 225550" src="https://github.com/user-attachments/assets/af1d4b16-51b7-4be0-ae72-2a6aabc282c4" />
 
+## DCSweep :
+
+<img width="1917" height="514" alt="Screenshot 2026-03-24 223559" src="https://github.com/user-attachments/assets/9d41b8d0-6ed4-45b3-92be-336c4f010c91" />
+
 
 ## Transient Analysis :
 
