@@ -598,6 +598,9 @@ The inclusion of M3 introduces negative feedback in the circuit, which enhances 
 
 ## CONFIGURATION - 3
 
+<img width="888" height="765" alt="Screenshot 2026-03-24 222219" src="https://github.com/user-attachments/assets/8a7852d7-0e19-4ac3-9d15-1f741e124f9e" />
+
+
 ## Circuit Description
 
 The circuit represents a **common source (CS) amplifier with source degeneration and active load** implemented using CMOS transistors with **TSMC 0.18 µm technology**.
@@ -712,13 +715,38 @@ Thus
 W1 = 5 µm
 similarly, W3 = 5 µm
 
+
+### DC Operating Point :
+<img width="890" height="680" alt="Screenshot 2026-03-24 222029" src="https://github.com/user-attachments/assets/60de66ba-d2dc-4672-b11c-f8fefc58e59e" />
+
+
+### 
+
+<img width="1909" height="421" alt="Screenshot 2026-03-24 222419" src="https://github.com/user-attachments/assets/7b75043e-0996-45eb-b1f4-a3760fb1209a" />
+
+
+### Transient Analysis :
+#### INPUT :
+<img width="1919" height="440" alt="Screenshot 2026-03-24 222707" src="https://github.com/user-attachments/assets/8f0e987d-5a0b-4b7f-8a8f-ca1b496b3b8f" />
+
+
+#### OUTPUT :
+<img width="1919" height="444" alt="Screenshot 2026-03-24 222816" src="https://github.com/user-attachments/assets/780d0887-e478-41f4-8ba3-a7daac00e69d" />
+
+
+ ### AC Analysis :
+
+ <img width="1919" height="433" alt="Screenshot 2026-03-24 223022" src="https://github.com/user-attachments/assets/3634aaa1-5e1a-4de0-b7f8-67e659f0edf0" />
+
+
+
 #### Drain current equation for M2 transistor:
 ID = (1/2) kn' (W/L) (VOV)^2
 W2 = 11.82 µm
 By varying width:
-* W1 = 14.8  µm → Id = 200 µA
-* W2 = 35 µm → Id = 200 µA
-* W3 = 14.9  µm → Id = 200 µA
+* W1 = 15.9  µm → Id = 200.6 µA
+* W2 = 33.8 µm → Id = 200.6 µA
+* W3 = 15.1  µm → Id = 200.6 µA
 
 ## Simulated Results:
 
